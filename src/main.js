@@ -5,21 +5,27 @@ const WA = '254794384496'
 const booking = (message) => `https://wa.me/${WA}?text=${encodeURIComponent(message)}`
 const generalMessage = 'Hi SAMICH NAIL TECH, I would like to book a nail appointment.'
 
-// Replace these image paths as real client work becomes available.
+// Gallery media uploaded from the Samich Gallery collection.
 const nailGallery = [
-  { image: '/assets/samich-nails-editorial.png', style: 'Soft Girl', category: 'soft', alt: 'Glossy blush manicure with delicate French tips' },
-  { image: '/assets/pink-gel.png', style: 'Pink Gel', category: 'bold', alt: 'Close-up of glossy rose pink gel nails' },
-  { image: '/assets/minimal-nude.png', style: 'Minimal', category: 'minimal', alt: 'Minimal clean manicure in warm blush tones' },
-  { image: '/assets/french-tips.png', style: 'French Tips', category: 'french', alt: 'Soft micro-French tip nail design' },
-  { image: '/assets/glossy-nude.png', style: 'Glossy Nude', category: 'minimal', alt: 'Glossy caramel nude nail set in a warm editorial beauty scene' },
-  { image: '/assets/bold-art.png', style: 'Custom Art', category: 'bold', alt: 'Statement blush nail design with gold detail' },
+  { type: 'video', video: '/assets/gallery/samgal-1.mp4', style: 'Fresh Set', category: 'soft', alt: 'Fresh nail set by Samich Nail Tech' },
+  { type: 'video', video: '/assets/gallery/samgal-2.mp4', style: 'Glossy Finish', category: 'minimal', alt: 'Glossy nail finish by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/samgal-4.jpeg', style: 'Pink Set', category: 'bold', alt: 'Pink nail set by Samich Nail Tech' },
+  { type: 'video', video: '/assets/gallery/whatsapp-video-1.mp4', style: 'Nail Details', category: 'minimal', alt: 'Close-up nail details by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-1.jpeg', style: 'Soft Girl', category: 'soft', alt: 'Soft girl nail set by Samich Nail Tech' },
+  { type: 'video', video: '/assets/gallery/whatsapp-video-2.mp4', style: 'Pretty Tips', category: 'french', alt: 'Pretty nail tips by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-2.jpeg', style: 'Clean Girl', category: 'minimal', alt: 'Clean girl nail set by Samich Nail Tech' },
+  { type: 'video', video: '/assets/gallery/whatsapp-video-3.mp4', style: 'Custom Set', category: 'bold', alt: 'Custom nail set by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-3.jpeg', style: 'Glossy Nude', category: 'minimal', alt: 'Glossy nude nail set by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-4.jpeg', style: 'French Tips', category: 'french', alt: 'French tip nail set by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-5.jpeg', style: 'Bold Art', category: 'bold', alt: 'Bold nail art set by Samich Nail Tech' },
+  { type: 'image', image: '/assets/gallery/whatsapp-image-6.jpeg', style: 'Pretty Hands', category: 'soft', alt: 'Pretty hands with a fresh nail set' },
 ]
 
 const icon = (name) => ({
   arrow: '<span aria-hidden="true">↗</span>', heart: '<span aria-hidden="true">♡</span>', spark: '<span aria-hidden="true">✦</span>', check: '<span aria-hidden="true">✓</span>', pin: '<span aria-hidden="true">⌖</span>', whatsapp: '<svg class="whatsapp-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M20.52 3.48A11.8 11.8 0 0 0 12.06 0C5.5 0 .16 5.34.16 11.9c0 2.1.55 4.15 1.59 5.96L.06 24l6.28-1.65a11.9 11.9 0 0 0 5.72 1.46h.01c6.56 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.45-8.43ZM12.07 21.8h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.73.98.99-3.64-.23-.37a9.87 9.87 0 0 1-1.52-5.28C2.16 6.44 6.6 2 12.06 2c2.64 0 5.12 1.03 6.98 2.9a9.8 9.8 0 0 1 2.88 6.99c0 5.46-4.44 9.9-9.85 9.91Zm5.43-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.87 1.2 3.07.15.2 2.08 3.17 5.04 4.44.7.3 1.25.48 1.68.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.12-.27-.2-.57-.35Z"/></svg>'
 }[name] || '')
 
-const galleryMarkup = (items) => items.map((item, i) => `<button class="gallery-item ${i === 0 ? 'gallery-item--tall' : ''}" data-index="${nailGallery.indexOf(item)}" aria-label="View ${item.style} nail set"><img src="${item.image}" alt="${item.alt}" loading="lazy" width="716" height="890"><span>${item.style}</span></button>`).join('')
+const galleryMarkup = (items) => items.map((item, i) => `<button class="gallery-item ${i === 0 ? 'gallery-item--tall' : ''}" data-index="${nailGallery.indexOf(item)}" aria-label="View ${item.style} nail set">${item.type === 'video' ? `<video src="${item.video}" muted loop autoplay playsinline preload="metadata" aria-label="${item.alt}"></video><b class="video-badge" aria-hidden="true">▶</b>` : `<img src="${item.image}" alt="${item.alt}" loading="lazy" width="716" height="890">`}<span>${item.style}</span></button>`).join('')
 
 document.querySelector('#app').innerHTML = `
   <header class="site-header"><a class="wordmark" href="#home" aria-label="SAMICH NAIL TECH home"><span>SAMICH</span><small>NAIL TECH</small></a><nav aria-label="Main navigation"><a href="#home">Home</a><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#house-calls">House Calls</a><a href="#contact">Contact</a></nav><a class="button button--small" href="${booking(generalMessage)}" target="_blank" rel="noreferrer">Book now ${icon('arrow')}</a><button class="menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button></header>
@@ -36,13 +42,13 @@ document.querySelector('#app').innerHTML = `
   </main>
   <footer><div class="footer-brand"><a class="wordmark" href="#home"><span>SAMICH</span><small>NAIL TECH</small></a><p>Nails that match your vibe.</p></div><div class="footer-links"><div><strong>Explore</strong><a href="#services">Services</a><a href="#gallery">Gallery</a><a href="#house-calls">House calls</a></div><div><strong>Book</strong><a href="${booking(generalMessage)}" target="_blank" rel="noreferrer">WhatsApp</a><a href="tel:0794384496">0794 384 496</a><span>House calls only</span></div></div><div class="qr-wrap"><canvas id="qr" width="100" height="100" aria-label="QR code to book on WhatsApp"></canvas><span>Scan to book</span></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} SAMICH NAIL TECH. All rights reserved.</span><span>Made for pretty hands ${icon('heart')}</span></div></footer>
   <a class="floating-wa" href="${booking(generalMessage)}" target="_blank" rel="noreferrer" aria-label="Book on WhatsApp">${icon('whatsapp')}<span>Book on WhatsApp</span></a>
-  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Nail work preview" hidden><button class="lightbox-close" aria-label="Close preview">×</button><img src="" alt=""><p></p></div>
+  <div class="lightbox" role="dialog" aria-modal="true" aria-label="Nail work preview" hidden><button class="lightbox-close" aria-label="Close preview">×</button><div class="lightbox-media"></div><p></p></div>
 `
 
 const renderGallery = (filter = 'all') => { const items = filter === 'all' ? nailGallery : nailGallery.filter(x => x.category === filter); document.querySelector('#gallery-grid').innerHTML = galleryMarkup(items) }
 document.addEventListener('click', (e) => {
   const filter = e.target.closest('.filter'); if (filter) { document.querySelectorAll('.filter').forEach(x => x.classList.remove('active')); filter.classList.add('active'); renderGallery(filter.dataset.filter) }
-  const item = e.target.closest('.gallery-item'); if (item) { const data = nailGallery[Number(item.dataset.index)]; const box = document.querySelector('.lightbox'); box.querySelector('img').src = data.image; box.querySelector('img').alt = data.alt; box.querySelector('p').textContent = data.style; box.hidden = false; document.body.classList.add('modal-open'); box.querySelector('.lightbox-close').focus() }
+  const item = e.target.closest('.gallery-item'); if (item) { const data = nailGallery[Number(item.dataset.index)]; const box = document.querySelector('.lightbox'); const media = box.querySelector('.lightbox-media'); media.innerHTML = data.type === 'video' ? `<video src="${data.video}" controls autoplay playsinline></video>` : `<img src="${data.image}" alt="${data.alt}">`; box.querySelector('p').textContent = data.style; box.hidden = false; document.body.classList.add('modal-open'); box.querySelector('.lightbox-close').focus() }
   if (e.target.closest('.lightbox-close') || (e.target.classList.contains('lightbox'))) { document.querySelector('.lightbox').hidden = true; document.body.classList.remove('modal-open') }
   const menu = e.target.closest('.menu-toggle'); if (menu) { const nav = document.querySelector('nav'); const open = nav.classList.toggle('open'); menu.setAttribute('aria-expanded', open) }
 })
